@@ -203,13 +203,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609151340369_newMigration01.cs" />
-    <Compile Include="Migrations\201609151340369_newMigration01.Designer.cs">
-      <DependentUpon>201609151340369_newMigration01.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201609151437398_newMigration02.cs" />
-    <Compile Include="Migrations\201609151437398_newMigration02.Designer.cs">
-      <DependentUpon>201609151437398_newMigration02.cs</DependentUpon>
+    <Compile Include="Migrations\201609151503496_newmigration.cs" />
+    <Compile Include="Migrations\201609151503496_newmigration.Designer.cs">
+      <DependentUpon>201609151503496_newmigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -298,6 +294,8 @@
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Customers\Edit.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Customers\PickUpSchedule.cshtml" />
+    <Content Include="Views\Customers\ResultView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -311,11 +309,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609151340369_newMigration01.resx">
-      <DependentUpon>201609151340369_newMigration01.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609151437398_newMigration02.resx">
-      <DependentUpon>201609151437398_newMigration02.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609151503496_newmigration.resx">
+      <DependentUpon>201609151503496_newmigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

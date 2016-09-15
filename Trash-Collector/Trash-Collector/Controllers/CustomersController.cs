@@ -148,5 +148,34 @@ namespace Trash_Collector.Models
             }
             base.Dispose(disposing);
         }
+
+
+        //public ActionResult PickUpSchedule()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public ActionResult PickUpSchedule(int zipcode)
+        //{
+        //       var customers = db.Customers.Where(x => x.ZipCode == zipcode).ToList();
+        //       return View("ResultView", customers);
+        //}
+        public ActionResult PickUpSchedule()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PickUpSchedule(int zipcode,DateTime pickupday)
+        {
+            var customers = db.Customers.Where(x => x.ZipCode == zipcode && x.PickUpDay == pickupday).ToList();
+            return View("ResultView", customers);
+        }
+
+        public ActionResult ChangePickUpDay(int id)
+        {
+
+        }
     }
 }
