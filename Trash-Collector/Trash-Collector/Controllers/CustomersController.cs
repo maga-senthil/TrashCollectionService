@@ -6,9 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Trash_Collector.Models;
 
-namespace Trash_Collector.Controllers
+namespace Trash_Collector.Models
 {
     public class CustomersController : Controller
     {
@@ -41,7 +40,6 @@ namespace Trash_Collector.Controllers
         {
             ViewBag.Email = new SelectList(db.Users, "Id", "Email");
             return View();
-
         }
 
         // POST: Customers/Create
@@ -64,7 +62,7 @@ namespace Trash_Collector.Controllers
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-               
+
             }
 
             ViewBag.Email = new SelectList(db.Users, "Id", "Email", customer.Email);
@@ -82,6 +80,7 @@ namespace Trash_Collector.Controllers
             }
             return pickupScheduleList;
         }
+
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
         {

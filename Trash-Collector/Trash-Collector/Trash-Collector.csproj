@@ -197,21 +197,25 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CalendersController.cs" />
-    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609142116255_initial migration.cs" />
-    <Compile Include="Migrations\201609142116255_initial migration.Designer.cs">
-      <DependentUpon>201609142116255_initial migration.cs</DependentUpon>
+    <Compile Include="Migrations\201609151340369_newMigration01.cs" />
+    <Compile Include="Migrations\201609151340369_newMigration01.Designer.cs">
+      <DependentUpon>201609151340369_newMigration01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609151437398_newMigration02.cs" />
+    <Compile Include="Migrations\201609151437398_newMigration02.Designer.cs">
+      <DependentUpon>201609151437398_newMigration02.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calender.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginViewModelPage.cs" />
@@ -307,8 +311,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609142116255_initial migration.resx">
-      <DependentUpon>201609142116255_initial migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609151340369_newMigration01.resx">
+      <DependentUpon>201609151340369_newMigration01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609151437398_newMigration02.resx">
+      <DependentUpon>201609151437398_newMigration02.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
