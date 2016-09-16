@@ -203,9 +203,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609151503496_newmigration.cs" />
-    <Compile Include="Migrations\201609151503496_newmigration.Designer.cs">
-      <DependentUpon>201609151503496_newmigration.cs</DependentUpon>
+    <Compile Include="Migrations\201609152301294_newMigration04.cs" />
+    <Compile Include="Migrations\201609152301294_newMigration04.Designer.cs">
+      <DependentUpon>201609152301294_newMigration04.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609161344490_CalenderEdit01.cs" />
+    <Compile Include="Migrations\201609161344490_CalenderEdit01.Designer.cs">
+      <DependentUpon>201609161344490_CalenderEdit01.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -296,6 +300,8 @@
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Customers\PickUpSchedule.cshtml" />
     <Content Include="Views\Customers\ResultView.cshtml" />
+    <Content Include="Views\Customers\RemovePickupDay.cshtml" />
+    <Content Include="Views\Customers\AddPickupDay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -309,8 +315,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201609151503496_newmigration.resx">
-      <DependentUpon>201609151503496_newmigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609152301294_newMigration04.resx">
+      <DependentUpon>201609152301294_newMigration04.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609161344490_CalenderEdit01.resx">
+      <DependentUpon>201609161344490_CalenderEdit01.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

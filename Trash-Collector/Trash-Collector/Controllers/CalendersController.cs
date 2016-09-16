@@ -48,14 +48,30 @@ namespace Trash_Collector.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Days")] Calender calender)
         {
+            Calender tempCalender = new Calender();
+            foreach (DateTime day in GenerateCalender(calender.Days))
+            {
+                tempCalender.Days = day;
+                db.calender.Add(tempCalender);
+                db.SaveChanges();
+            }
             if (ModelState.IsValid)
             {
-                db.calender.Add(calender);
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(calender);
+        }
+        static List<DateTime> GenerateCalender(DateTime day)
+        {
+            List<DateTime> calenderList = new List<DateTime>();
+            calenderList.Add(day);
+            for (int i = 0; i < 729; i++)
+            {
+                day = day.AddDays(1);
+                calenderList.Add(day);
+            }
+            return calenderList;
         }
 
         // GET: Calenders/Edit/5

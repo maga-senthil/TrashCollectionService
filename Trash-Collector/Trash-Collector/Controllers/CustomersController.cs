@@ -47,16 +47,35 @@ namespace Trash_Collector.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,FirstName,LastName,StreetAddress,City,state,ZipCode,PickUpDay,Email")] Customer customer)
+        //{
+        //    List<Calender> calendar = new List<Calender>();
+        //    foreach (DateTime day in GeneratePickupSchedule(customer.PickUpDay))
+        //    {
+        //        calendar.Add(new Calender() { Days = day });
+        //    }
+        //    customer.PickUpDates = calendar;
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Customers.Add(customer);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+
+        //    }
+
+        //    ViewBag.Email = new SelectList(db.Users, "Id", "Email", customer.Email);
+        //    return View(customer);
+        //}
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,StreetAddress,City,state,ZipCode,PickUpDay,Email")] Customer customer)
         {
             List<Calender> calendar = new List<Calender>();
-            //DateTime PickUpDay = default(DateTime);
             foreach (DateTime day in GeneratePickupSchedule(customer.PickUpDay))
             {
-                calendar.Add(new Calender() { Days = day });
+                var tempPickupDay = db.calender.Where(x => x.Days == day).Single();
+                calendar.Add(tempPickupDay);
             }
             customer.PickUpDates = calendar;
-
             if (ModelState.IsValid)
             {
                 db.Customers.Add(customer);
@@ -73,7 +92,7 @@ namespace Trash_Collector.Models
         {
             List<DateTime> pickupScheduleList = new List<DateTime>();
             pickupScheduleList.Add(pickupSchedule);
-            for (int i = 0; i < 52; i++)
+            for (int i = 0; i < 51; i++)
             {
                 pickupSchedule = pickupSchedule.AddDays(7);
                 pickupScheduleList.Add(pickupSchedule);
@@ -172,10 +191,44 @@ namespace Trash_Collector.Models
             var customers = db.Customers.Where(x => x.ZipCode == zipcode && x.PickUpDay == pickupday).ToList();
             return View("ResultView", customers);
         }
-
-        public ActionResult ChangePickUpDay(int id)
+        public ActionResult RemovePickupDay(int? id)
         {
+            Customer customer = db.Customers.Find(id);
+            return View(customer);
+        }
 
+        [HttpPost]
+        public ActionResult RemovePickupDay(int? id, DateTime pickupday)
+        {
+            Customer customer = db.Customers.Find(id);
+            var tempPickupDay = db.calender.Where(x => x.Days == pickupday).Single();
+            customer.PickUpDates.Remove(tempPickupDay);
+            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
+        public ActionResult AddPickupDay(int? id)
+        {
+            Customer customer = db.Customers.Find(id);
+            return View(customer);
+        }
+
+        [HttpPost]
+        public ActionResult AddPickupDay(int? id, DateTime pickupday)
+        {
+            Customer customer = db.Customers.Find(id);
+            var tempPickupDay = db.calender.Where(x => x.Days == pickupday).Single();
+            customer.PickUpDates.Add(tempPickupDay);
+            if (ModelState.IsValid)
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
