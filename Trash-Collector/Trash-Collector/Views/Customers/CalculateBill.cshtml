@@ -1,22 +1,23 @@
 ﻿@model Trash_Collector.Models.Customer
+
 @{
-    ViewBag.Title = "RemovePickupDay";
+    ViewBag.Title = "CalculateBill";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>RemovePickupDay</h2>
+<h2>CalculateBill</h2>
 
-@using (Html.BeginForm("RemovePickupDay", "Customers"))
+@using (Html.BeginForm("CalculateBill", "Customers"))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>PickUpSchedule</h4>
+        <h4>Choose Month</h4>
 
         <div class="form-group">
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PickUpDay, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PickUpDay, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Bill, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Bill, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -26,8 +27,8 @@
             </div>
         </div>
     </div>
-}
 
+}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

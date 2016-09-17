@@ -39,6 +39,7 @@ namespace Trash_Collector.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
         public ApplicationUser ApplicationUsers { get; set; }
-      
+        [Display(Name = "Last Viewed Payment")]
+        public string Bill { get; set; }
     }
 }
