@@ -32,9 +32,6 @@
         <th>
             @Html.DisplayNameFor(model => model.ZipCode)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.PickUpDay)
-        </th>*@
         <th></th>
     </tr>
 
@@ -61,9 +58,6 @@
         <td>
             @Html.DisplayFor(modelItem => item.ZipCode)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.PickUpDay)
-        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |

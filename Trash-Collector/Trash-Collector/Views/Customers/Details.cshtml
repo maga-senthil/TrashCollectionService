@@ -10,13 +10,6 @@
     <h4>Customer</h4>
     <hr />
     <dl class="dl-horizontal">
-        @*<dt>
-            @Html.DisplayNameFor(model => model.ApplicationUsers.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ApplicationUsers.Email)
-        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -88,6 +81,5 @@
     @Html.ActionLink("Remove Pickup Day", "RemovePickupDay", new { id = Model.Id }) |
     @Html.ActionLink("Add Pickup Day", "AddPickupDay", new { id = Model.Id }) |
     @Html.ActionLink("Change Pickup Schedule", "ChangePickupSchedule", new { id = Model.Id }) |
-    @Html.ActionLink("Calculate Payments", "CalculateBill", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Calculate Payments", "CalculateBill", new { id = Model.Id })
 </p>

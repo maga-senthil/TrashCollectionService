@@ -47,26 +47,7 @@ namespace Trash_Collector.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Id,FirstName,LastName,StreetAddress,City,state,ZipCode,PickUpDay,Email")] Customer customer)
-        //{
-        //    List<Calender> calendar = new List<Calender>();
-        //    foreach (DateTime day in GeneratePickupSchedule(customer.PickUpDay))
-        //    {
-        //        calendar.Add(new Calender() { Days = day });
-        //    }
-        //    customer.PickUpDates = calendar;
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Customers.Add(customer);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-
-        //    }
-
-        //    ViewBag.Email = new SelectList(db.Users, "Id", "Email", customer.Email);
-        //    return View(customer);
-        //}
+        
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,StreetAddress,City,state,ZipCode,PickUpDay,Email")] Customer customer)
         {
             List<Calender> calendar = new List<Calender>();
@@ -80,7 +61,7 @@ namespace Trash_Collector.Models
             {
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", customer);
 
             }
 
@@ -163,7 +144,7 @@ namespace Trash_Collector.Models
             Customer customer = db.Customers.Find(id);
             db.Customers.Remove(customer);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Home");
         }
 
         protected override void Dispose(bool disposing)
@@ -174,19 +155,6 @@ namespace Trash_Collector.Models
             }
             base.Dispose(disposing);
         }
-
-
-        //public ActionResult PickUpSchedule()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult PickUpSchedule(int zipcode)
-        //{
-        //       var customers = db.Customers.Where(x => x.ZipCode == zipcode).ToList();
-        //       return View("ResultView", customers);
-        //}
         public ActionResult PickUpSchedule()
         {
             return View();
