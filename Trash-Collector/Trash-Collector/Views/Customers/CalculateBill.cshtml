@@ -5,16 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CalculateBill</h2>
+<h2>Calculate Bill</h2>
 
 @using (Html.BeginForm("CalculateBill", "Customers"))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Choose Month</h4>
 
         <div class="form-group">
+            <h4 class="control-label col-md-2">Month</h4>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Bill, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Bill, "", new { @class = "text-danger" })

@@ -4,17 +4,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ChangePickupSchedule</h2>
+<h2>Change Pickup Schedule</h2>
 
 @using (Html.BeginForm("ChangePickupSchedule", "Customers"))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>PickUpSchedule</h4>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PickUpDay, htmlAttributes: new { @class = "control-label col-md-2" })
+            <h4 class="control-label col-md-2">Date</h4>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PickUpDay, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PickUpDay, "", new { @class = "text-danger" })

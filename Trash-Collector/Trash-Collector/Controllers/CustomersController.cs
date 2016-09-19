@@ -78,7 +78,7 @@ namespace Trash_Collector.Models
         }
         public static string GetCoordinates(string streetAddress, string city)
         {
-            var address = "streetAddress,city";
+            var address = streetAddress + city;
             var locationService = new GoogleLocationService();
             var point = locationService.GetLatLongFromAddress(address);
 
@@ -187,13 +187,22 @@ namespace Trash_Collector.Models
             var tempStreetAddressList = tempPickupSchedule.Select(x => x.StreetAddress).ToList();
             List<string> mapCoordinateList = new List<string>();
             var mapCoordinates = mapCoordinateList;
-            for (int i = 0; i < (tempPickupSchedule.Count + 1); i++)
+            for (int i = 0; i < (tempPickupSchedule.Count); i++)
             {
-                string mapInfo = "\"Id\":" + (i + 1) + "," + "\"PlaceName\": " + "\"\"" + tempPickupSchedule[i].StreetAddress + "\"" + ", " + "\"GeoLong\": " + "\"" + tempPickupSchedule[i].Longitude + "\"" + ", " + "\"GeoLat\": " + "\"" + tempPickupSchedule[i].Latitude + "\"";
-                mapCoordinateList.Add(mapInfo);
+                string mapInfo = null;
+                if (i < (tempPickupSchedule.Count - 1))
+                {
+                    if (tempPickupSchedule.Count > 1 && i == 0) { mapCoordinates.Add("["); }
+                    mapInfo = "{ " + "\"Id\": " + (i + 1) + ", " + "\"PlaceName\": " + "\"" + tempPickupSchedule[i].City + "\"" + ", " + "\"GeoLat\": " + "\"" + tempPickupSchedule[i].Latitude + "\"" + ", " + "\"GeoLong\": " + "\"" + tempPickupSchedule[i].Longitude + "\"" + " }" + ", ";
+                }
+                if (i == (tempPickupSchedule.Count - 1))
+                {
+                    mapInfo = "{ " + "\"Id\": " + (i + 1) + ", " + "\"PlaceName\": " + "\"" + tempPickupSchedule[i].City + "\"" + ", " + "\"GeoLat\": " + "\"" + tempPickupSchedule[i].Latitude + "\"" + ", " + "\"GeoLong\": " + "\"" + tempPickupSchedule[i].Longitude + "\"" + " } ";
+                }
+                mapCoordinateList.Add(mapInfo.Trim());
+                if (tempPickupSchedule.Count > 1 && i == (tempPickupSchedule.Count - 1)) { mapCoordinates.Add("]"); }
             }
-            //{ "Id": 1, "PlaceName": "Zaghouan", "GeoLong": "36.401081", "GeoLat": "10.16596" }
-            return View("MapDisplay", mapCoordinates);
+            return View("ResultView", tempPickupSchedule);
         }
         public ActionResult RemovePickupDay(int? id)
         {
