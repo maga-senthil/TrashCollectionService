@@ -1,4 +1,5 @@
 ﻿using System;
+using GoogleMaps.LocationServices;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -50,6 +51,13 @@ namespace Trash_Collector.Models
         
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,StreetAddress,City,state,ZipCode,PickUpDay,Email")] Customer customer)
         {
+            string latlng = GetCoordinates(customer.StreetAddress, customer.City);
+            List<string> splitLatLng = latlng.Split(',').ToList();
+            string latitude = splitLatLng[0];
+            string longitude = splitLatLng[1];
+            customer.Latitude = latitude;
+            customer.Longitude = longitude;
+
             List<Calender> calendar = new List<Calender>();
             foreach (DateTime day in GeneratePickupSchedule(customer.PickUpDay))
             {
@@ -68,7 +76,17 @@ namespace Trash_Collector.Models
             ViewBag.Email = new SelectList(db.Users, "Id", "Email", customer.Email);
             return View(customer);
         }
+        public static string GetCoordinates(string streetAddress, string city)
+        {
+            var address = "streetAddress,city";
+            var locationService = new GoogleLocationService();
+            var point = locationService.GetLatLongFromAddress(address);
 
+            var latitude = point.Latitude;
+            var longitude = point.Longitude;
+            string latlng = latitude.ToString().Trim() + "," + longitude.ToString().Trim();
+            return latlng;
+        }
         static List<DateTime> GeneratePickupSchedule(DateTime pickupSchedule)
         {
             List<DateTime> pickupScheduleList = new List<DateTime>();
@@ -164,7 +182,18 @@ namespace Trash_Collector.Models
         public ActionResult PickUpSchedule(int zipcode, DateTime pickupday)
         {
             var tempPickupSchedule = db.calender.Where(x => x.Days == pickupday).Single().PickUpSchedule.Where(x => x.ZipCode == zipcode).ToList();
-            return View("ResultView", tempPickupSchedule);
+            var tempLatitudeList = tempPickupSchedule.Select(x => x.Latitude).ToList();
+            var tempLongitudeList = tempPickupSchedule.Select(x => x.Longitude).ToList();
+            var tempStreetAddressList = tempPickupSchedule.Select(x => x.StreetAddress).ToList();
+            List<string> mapCoordinateList = new List<string>();
+            var mapCoordinates = mapCoordinateList;
+            for (int i = 0; i < (tempPickupSchedule.Count + 1); i++)
+            {
+                string mapInfo = "\"Id\":" + (i + 1) + "," + "\"PlaceName\": " + "\"\"" + tempPickupSchedule[i].StreetAddress + "\"" + ", " + "\"GeoLong\": " + "\"" + tempPickupSchedule[i].Longitude + "\"" + ", " + "\"GeoLat\": " + "\"" + tempPickupSchedule[i].Latitude + "\"";
+                mapCoordinateList.Add(mapInfo);
+            }
+            //{ "Id": 1, "PlaceName": "Zaghouan", "GeoLong": "36.401081", "GeoLat": "10.16596" }
+            return View("MapDisplay", mapCoordinates);
         }
         public ActionResult RemovePickupDay(int? id)
         {
@@ -301,6 +330,23 @@ namespace Trash_Collector.Models
             if (billMonthNumber == 11) { billMonth = "November"; }
             if (billMonthNumber == 12) { billMonth = "December"; }
             return billMonth;
+        }
+        public ActionResult MapDisplay(int? id)
+        {
+            Customer customer = db.Customers.Find(id);
+            return View(customer);
+        }
+
+        [HttpPost]
+        public ActionResult MapDisplay(int? id, string coordinates)
+        {
+            Customer customer = db.Customers.Find(id);
+            if (ModelState.IsValid)
+            {
+                db.SaveChanges();
+                return RedirectToAction("Details", customer);
+            }
+            return View(customer);
         }
     }
 }

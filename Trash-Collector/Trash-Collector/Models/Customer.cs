@@ -41,5 +41,7 @@ namespace Trash_Collector.Models
         public ApplicationUser ApplicationUsers { get; set; }
         [Display(Name = "Last Viewed Payment")]
         public string Bill { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
     }
 }

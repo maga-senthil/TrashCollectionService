@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GoogleMaps.LocationServices, Version=0.1.5926.26040, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GoogleMaps.LocationServices.0.9.8.6\lib\net40\GoogleMaps.LocationServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -215,6 +219,18 @@
     <Compile Include="Migrations\201609171429514_billMigration01.Designer.cs">
       <DependentUpon>201609171429514_billMigration01.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609191550593_coordinatesMigration.cs" />
+    <Compile Include="Migrations\201609191550593_coordinatesMigration.Designer.cs">
+      <DependentUpon>201609191550593_coordinatesMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609191733213_noCoordinateMigration.cs" />
+    <Compile Include="Migrations\201609191733213_noCoordinateMigration.Designer.cs">
+      <DependentUpon>201609191733213_noCoordinateMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201609191734261_latlngMigration.cs" />
+    <Compile Include="Migrations\201609191734261_latlngMigration.Designer.cs">
+      <DependentUpon>201609191734261_latlngMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Calender.cs" />
@@ -234,6 +250,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="GoogleMaps.LocationServices.readme.txt" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -308,6 +325,7 @@
     <Content Include="Views\Customers\AddPickupDay.cshtml" />
     <Content Include="Views\Customers\ChangePickupSchedule.cshtml" />
     <Content Include="Views\Customers\CalculateBill.cshtml" />
+    <Content Include="Views\Customers\MapDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -329,6 +347,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201609171429514_billMigration01.resx">
       <DependentUpon>201609171429514_billMigration01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609191550593_coordinatesMigration.resx">
+      <DependentUpon>201609191550593_coordinatesMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609191733213_noCoordinateMigration.resx">
+      <DependentUpon>201609191733213_noCoordinateMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609191734261_latlngMigration.resx">
+      <DependentUpon>201609191734261_latlngMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
