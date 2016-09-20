@@ -183,7 +183,13 @@ namespace Trash_Collector.Models
         {
             var tempPickupSchedule = db.calender.Where(x => x.Days == pickupday).Single().PickUpSchedule.Where(x => x.ZipCode == zipcode).ToList();
             var tempLatitudeList = tempPickupSchedule.Select(x => x.Latitude).ToList();
+            double latitudeAvg = 0;
+            foreach (string lat in tempLatitudeList) { double latitude = double.Parse(lat); latitudeAvg += latitude; }
+            string latAvg = (latitudeAvg / tempLatitudeList.Count).ToString();
             var tempLongitudeList = tempPickupSchedule.Select(x => x.Longitude).ToList();
+            double longitudeAvg = 0;
+            foreach (string lat in tempLongitudeList) { double longitude = double.Parse(lat); longitudeAvg += longitude; }
+            string lngAvg = (longitudeAvg / tempLongitudeList.Count).ToString();
             var tempStreetAddressList = tempPickupSchedule.Select(x => x.StreetAddress).ToList();
             List<string> mapCoordinateList = new List<string>();
             var mapCoordinates = mapCoordinateList;
@@ -356,6 +362,12 @@ namespace Trash_Collector.Models
                 return RedirectToAction("Details", customer);
             }
             return View(customer);
+        }
+        public ActionResult GetCustomerSchedule(int? id)
+        {
+            Customer customer = db.Customers.Find(id);
+            var tempPickupSchedule = customer.PickUpDates.Select(x => x).ToList();
+            return View(tempPickupSchedule);
         }
     }
 }

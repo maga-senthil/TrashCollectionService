@@ -326,6 +326,7 @@
     <Content Include="Views\Customers\ChangePickupSchedule.cshtml" />
     <Content Include="Views\Customers\CalculateBill.cshtml" />
     <Content Include="Views\Customers\MapDisplay.cshtml" />
+    <Content Include="Views\Customers\GetCustomerSchedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
